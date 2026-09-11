@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3dAssist — find 3D models, plan the print, follow your printer</title>
+<meta name="description" content="3dAssist is an Android app that searches public 3D model catalogs, prepares a print plan and follows the status of a configured printer.">
+<link rel="icon" href="assets/icon.png">
+<style>
+  :root{ --bg:#16181f; --card:#1e222c; --line:#2b3140; --text:#f2f4f8; --dim:#98a0b0; --accent:#ff7b2d; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font:16px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px}
+  header{padding:48px 0 8px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  header img{width:88px;height:88px;border-radius:20px}
+  h1{font-size:40px;margin:0;letter-spacing:-.5px}
+  .tag{color:var(--dim);margin:6px 0 0}
+  h2{font-size:22px;margin:40px 0 12px}
+  p{margin:0 0 14px}
+  ul{margin:0 0 14px;padding-left:20px}
+  li{margin:6px 0}
+  .shots{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0 4px}
+  .shots figure{margin:0;flex:1 1 220px;max-width:260px}
+  .shots img{width:100%;border:1px solid var(--line);border-radius:12px;display:block}
+  .shots figcaption{color:var(--dim);font-size:14px;margin-top:8px}
+  .note{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:18px 0}
+  a{color:var(--accent)}
+  footer{color:var(--dim);font-size:14px;border-top:1px solid var(--line);margin-top:48px;padding:20px 0 56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <img src="assets/icon.png" alt="3dAssist icon">
+    <div>
+      <h1>3dAssist</h1>
+      <p class="tag">Find 3D models, prepare a print plan, and follow your printer — from one Android app.</p>
+    </div>
+  </header>
+
+  <h2>What the app does</h2>
+  <p>3dAssist brings the practical steps of 3D printing into one mobile flow. You search public model
+     catalogs, open a model and choose an available file. You pick quality goals and material, review the
+     resulting print plan with its explanations, and accept it. When a configured printer supports it,
+     3dAssist sends the prepared job over your local network and shows progress, temperatures and
+     remaining time reported by that printer. The history screen keeps past attempts for review or repeat.</p>
+
+  <h2>How it uses Thingiverse</h2>
+  <ul>
+    <li>Search and model pages are read through the official Thingiverse API.</li>
+    <li>A model opens with its title, author and a link back to its page on Thingiverse.</li>
+    <li>Files are downloaded for the user who asked for them, on their own device, for their own print.
+        3dAssist does not mirror, rehost or republish Thingiverse content anywhere.</li>
+    <li>Signing in is optional and happens on Thingiverse's own page; the app never asks for a
+        Thingiverse password.</li>
+    <li>Licenses and attribution shown by the source are carried into the model card.</li>
+  </ul>
+
+  <h2>Screens</h2>
+  <div class="shots">
+    <figure><img src="assets/01-search.png" alt="Search across model catalogs"><figcaption>Search across catalogs</figcaption></figure>
+    <figure><img src="assets/04-ai-explanation.png" alt="Print plan with explanations"><figcaption>Print plan, explained</figcaption></figure>
+    <figure><img src="assets/05-print-status.png" alt="Live printer status"><figcaption>Printer status</figcaption></figure>
+  </div>
+
+  <h2>Requirements</h2>
+  <ul>
+    <li>Android phone or tablet.</li>
+    <li>Model formats handled by the app: STL, 3MF, OBJ, STEP.</li>
+    <li>Print planning and slicing run on a 3dAssist backend the user configures; printing needs a
+        supported printer on the same local network.</li>
+    <li>Catalog availability, downloads and sign-in requirements depend on each independent source.</li>
+  </ul>
+
+  <div class="note">
+    3dAssist is an independent application. It is not affiliated with, sponsored by or endorsed by
+    Thingiverse, Printables, MakerWorld, MyMiniFactory, Thangs, GrabCAD or Cults3D. Those names identify
+    their respective services.
+  </div>
+
+  <h2>Contact</h2>
+  <p>Questions, bug reports and takedown requests: <a href="mailto:tiptopby@gmail.com">tiptopby@gmail.com</a>.</p>
+
+  <footer>
+    3dAssist · Android application · page updated 2026-09-11
+  </footer>
+
+</div>
+</body>
+</html>

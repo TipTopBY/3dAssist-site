@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3dAssist — OAuth redirect check</title>
+<style>
+  body{margin:0;background:#16181f;color:#f2f4f8;
+       font:16px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:720px;margin:0 auto;padding:48px 20px}
+  h1{font-size:26px;margin:0 0 18px}
+  .box{background:#1e222c;border:1px solid #2b3140;border-radius:12px;padding:18px 20px;margin:16px 0}
+  .ok{color:#7ddba3} .bad{color:#ff8f6b}
+  code{background:#11141a;padding:2px 6px;border-radius:6px}
+  p{margin:0 0 10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>OAuth redirect check</h1>
+  <p>This page exists only to verify that a Thingiverse authorization redirect arrives with a token.
+     It runs entirely in the browser, sends nothing anywhere and never shows the token in full.</p>
+  <div class="box" id="out">Reading the URL…</div>
+  <p>Nothing is stored. Close the tab when done.</p>
+</div>
+<script>
+(function () {
+  var out = document.getElementById('out');
+  var hash = location.hash.replace(/^#/, '');
+  var query = location.search.replace(/^\?/, '');
+  function parse(s) {
+    var o = {};
+    s.split('&').forEach(function (kv) {
+      if (!kv) return;
+      var i = kv.indexOf('=');
+      o[decodeURIComponent(i < 0 ? kv : kv.slice(0, i))] = i < 0 ? '' : decodeURIComponent(kv.slice(i + 1));
+    });
+    return o;
+  }
+  var h = parse(hash), q = parse(query);
+  var token = h.access_token || q.access_token;
+  var code = h.code || q.code;
+  var err = h.error || q.error;
+  var lines = [];
+  if (token) {
+    lines.push('<p class="ok"><b>access_token received.</b></p>');
+    lines.push('<p>Length: <code>' + token.length + '</code>, starts with <code>' +
+               token.slice(0, 4) + '…</code> — the full value is deliberately not shown.</p>');
+    lines.push('<p>Implicit flow works: the token arrives in the URL fragment.</p>');
+  } else if (code) {
+    lines.push('<p class="bad"><b>A <code>code</code> arrived, not a token.</b></p>');
+    lines.push('<p>The request was handled as the authorization-code flow, which needs a client secret.</p>');
+  } else if (err) {
+    lines.push('<p class="bad"><b>Error: <code>' + err + '</code></b></p>');
+  } else {
+    lines.push('<p class="bad">No token, code or error in this URL.</p>');
+    lines.push('<p>Open this page as the redirect target of an authorization request, not directly.</p>');
+  }
+  out.innerHTML = lines.join('');
+})();
+</script>
+</body>
+</html>

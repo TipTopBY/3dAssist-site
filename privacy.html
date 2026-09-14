@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3dAssist — Privacy Policy</title>
+<meta name="description" content="Privacy Policy for the 3dAssist Android application.">
+<link rel="icon" href="assets/icon.png">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="wrap doc">
+
+  <h1>Privacy Policy for 3dAssist</h1>
+  <p class="meta">Effective date: 2026-08-24 · published at
+     https://tiptopby.github.io/3dAssist-site/privacy.html</p>
+  <p class="nav"><a href="index.html">Overview</a> · <a href="terms.html">Terms and Conditions</a> · <a href="delete-account.html">Delete account</a></p>
+
+  <div class="note">
+    <p>Publisher / data controller: <strong>Pavel Avtushenko</strong></p>
+    <p style="margin:0">Privacy contact: <a href="mailto:p_avtushenko@outlook.com">p_avtushenko@outlook.com</a></p>
+  </div>
+
+  <p>3dAssist helps users find 3D models, prepare print plans and operate a configured printer. This
+     policy describes the behavior present in the reviewed Android code.</p>
+
+  <h2>Data handled</h2>
+  <ul>
+    <li>A random per-install identifier and the device model are sent to the configured 3dAssist backend to
+        issue and protect an app token. They are not hardware advertising identifiers.</li>
+    <li>If a user chooses an STL file or imports an available provider file for printing, the file and its
+        basic metadata are sent to the configured backend for analysis and preparation.</li>
+    <li>Model description, selected quality goals, material, intended use and revision comments are sent to
+        the configured backend to create and revise a print plan.</li>
+    <li>Print-attempt identifiers, printer display name, status events, selected rating and optional rating
+        comment are sent to the configured backend and are also cached locally for history/offline use.</li>
+    <li>A search entered in a non-English language may be sent to Google’s translation endpoint to obtain an
+        English catalog query. On-device ML Kit language identification/translation components are also
+        bundled.</li>
+    <li>Optional source login opens a provider sign-in page in an in-app WebView. Provider cookies remain in
+        Android WebView storage; app-managed cookie forwarding is restricted to declared same-provider HTTPS
+        origins when a download needs the session. The WebView itself currently allows provider-controlled
+        redirects and third-party cookies, so a redirected page can receive WebView data according to
+        browser rules. 3dAssist installs no JavaScript bridge and does not intentionally read the password
+        entered on the page.</li>
+    <li>A self-registered Cults3D username/API key and MyMiniFactory API key can be stored encrypted on the
+        device and sent directly to that provider to enable catalog search. They are not sent to the
+        3dAssist backend by the reviewed client.</li>
+    <li>Printer address and printer credentials are stored encrypted on the device and are used to
+        communicate directly with the printer on the local network. They are excluded from Android backup by
+        the app rules. Depending on the printer protocol, this LAN traffic may be cleartext.</li>
+  </ul>
+
+  <h2>Purposes and sharing</h2>
+  <p>Data is used to provide authentication, model processing, print planning, printer control, history,
+     translation and support of the user-requested source download. The code contains no advertising or
+     analytics SDK. Data is transmitted to <strong>the operator of the 3dAssist backend configured in the
+     app</strong>, Google translation services when translation is used, and a selected model-source
+     provider when the user uses that provider. Provider and printer traffic is not routed to another
+     source by the app.</p>
+
+  <h2>Security</h2>
+  <p>Release builds require an HTTPS backend origin, and app-managed source-cookie forwarding requires an
+     allowlisted HTTPS origin. The provider WebView is not currently host-pinned, so this policy does not
+     claim that every page it can render is HTTPS or confined to the initial provider. Sensitive settings
+     use Android Keystore-backed encryption. Local printers may require cleartext LAN protocols; the
+     reviewed manifest currently permits cleartext traffic globally, which is an open release risk
+     documented in the policy audit.</p>
+
+  <h2>Retention and deletion</h2>
+  <p>The connected account can be deleted in Settings → Privacy and data. The app asks for confirmation,
+     the backend deletes the account profile, favorites, print plans, uploaded files and history, and only
+     after confirmation the app clears its account token, cached history/outbox and pending
+     execution/upload data, and mints a new random install identifier. Printer credentials and provider
+     WebView sessions remain local and are removed separately from printer/source settings or by clearing
+     app storage. The same deletion can be requested without the app at
+     <a href="delete-account.html">https://tiptopby.github.io/3dAssist-site/delete-account.html</a>.
+     Encrypted service backups are rotated out on a 14-day cycle, so a copy of deleted data can survive in a
+     backup for up to 14 days after the account is deleted.</p>
+
+  <h2>Children, changes and contact</h2>
+  <p>The reviewed code does not implement a children-specific experience. Material policy changes are
+     published at this URL with a new effective date. Questions and privacy requests go to
+     <a href="mailto:p_avtushenko@outlook.com">p_avtushenko@outlook.com</a>.</p>
+
+  <footer>
+    3dAssist · Privacy Policy · effective 2026-08-24
+  </footer>
+
+</div>
+</body>
+</html>

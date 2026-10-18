@@ -16,7 +16,7 @@
 <div class="wrap doc">
 
   <h1>Privacy Policy for 3dAssist</h1>
-  <p class="meta">Effective date: 2026-08-24 · published at
+  <p class="meta">Effective date: 2026-10-16 · published at
      https://tiptopby.github.io/3dAssist-site/privacy.html</p>
   <p class="nav"><a href="index.html">Overview</a> · <a href="terms.html">Terms and Conditions</a> · <a href="delete-account.html">Delete account</a></p>
 
@@ -43,10 +43,11 @@
         bundled.</li>
     <li>Optional source login opens a provider sign-in page in an in-app WebView. Provider cookies remain in
         Android WebView storage; app-managed cookie forwarding is restricted to declared same-provider HTTPS
-        origins when a download needs the session. The WebView itself currently allows provider-controlled
-        redirects and third-party cookies, so a redirected page can receive WebView data according to
-        browser rules. 3dAssist installs no JavaScript bridge and does not intentionally read the password
-        entered on the page.</li>
+        origins when a download needs the session. Top-level WebView pages, login popups and the hidden
+        session check are restricted to explicitly allowed HTTPS provider/SSO hosts. Other page navigation
+        is blocked. Third-party cookies remain enabled for SSO; embedded resources follow browser rules.
+        3dAssist installs no JavaScript bridge and does not intentionally read the password entered on the
+        page.</li>
     <li>A self-registered Cults3D username/API key and MyMiniFactory API key can be stored encrypted on the
         device and sent directly to that provider to enable catalog search. They are not sent to the
         3dAssist backend by the reviewed client.</li>
@@ -55,21 +56,42 @@
         the app rules. Depending on the printer protocol, this LAN traffic may be cleartext.</li>
   </ul>
 
+  <h2>Diagnostics</h2>
+  <p>To fix errors, the app and the 3dAssist backend send reports to Sentry (processor: Functional Software,
+     Inc.; data stored in the EU region, Germany).</p>
+  <ul>
+    <li><strong>What is sent.</strong> Reports about app crashes and freezes and about print, upload and
+        catalog errors: stack trace, app version, device model, Android version and recent technical app
+        events. A pseudonymous backend account identifier (<code>owner_id</code>) is attached; name, account
+        email and advertising identifiers are not. The backend reports its own internal errors and
+        model-preparation failures with the same pseudonymous identifier, without request bodies, headers or
+        cookies.</li>
+    <li><strong>What is not sent.</strong> Screenshots, screen layout, session replay, network requests and
+        native reports are disabled. Before sending, the app strips IP addresses, saved printer credentials,
+        tokens and URL parameters.</li>
+    <li><strong>“Report a problem”.</strong> When the user chooses to send feedback from settings or an error
+        screen, its text and an optional reply email go to Sentry.</li>
+    <li><strong>Retention.</strong> Up to 90 days under the publisher's Sentry plan (30 days on the free
+        plan), after which reports are deleted automatically.</li>
+    <li><strong>How to opt out.</strong> Settings → “Send error reports”. The switch is on by default; once it
+        is off, the app sends no further reports or feedback.</li>
+  </ul>
+
   <h2>Purposes and sharing</h2>
   <p>Data is used to provide authentication, model processing, print planning, printer control, history,
-     translation and support of the user-requested source download. The code contains no advertising or
-     analytics SDK. Data is transmitted to <strong>the operator of the 3dAssist backend configured in the
-     app</strong>, Google translation services when translation is used, and a selected model-source
-     provider when the user uses that provider. Provider and printer traffic is not routed to another
-     source by the app.</p>
+     translation, support of the user-requested source download and error fixing. The code contains no
+     advertising or analytics SDK; the only error-reporting SDK is Sentry. Data is transmitted to <strong>the
+     operator of the 3dAssist backend configured in the app</strong>, Sentry for error reports and feedback,
+     Google translation services when translation is used, and a selected model-source provider when the
+     user uses that provider. Provider and printer traffic is not routed to another source by the app.</p>
 
   <h2>Security</h2>
   <p>Release builds require an HTTPS backend origin, and app-managed source-cookie forwarding requires an
-     allowlisted HTTPS origin. The provider WebView is not currently host-pinned, so this policy does not
-     claim that every page it can render is HTTPS or confined to the initial provider. Sensitive settings
-     use Android Keystore-backed encryption. Local printers may require cleartext LAN protocols; the
-     reviewed manifest currently permits cleartext traffic globally, which is an open release risk
-     documented in the policy audit.</p>
+     allowlisted HTTPS origin. Provider WebView page navigation is restricted to explicit HTTPS provider/SSO
+     hosts; this is not a filter for every embedded resource or iframe. Sensitive settings use Android
+     Keystore-backed encryption. Local printers may require cleartext LAN protocols; the reviewed manifest
+     currently permits cleartext traffic globally, which is an open release risk documented in the policy
+     audit.</p>
 
   <h2>Retention and deletion</h2>
   <p>The connected account can be deleted in Settings → Privacy and data. The app asks for confirmation,
@@ -88,7 +110,7 @@
      <a href="mailto:p_avtushenko@outlook.com">p_avtushenko@outlook.com</a>.</p>
 
   <footer>
-    3dAssist · Privacy Policy · effective 2026-08-24
+    3dAssist · Privacy Policy · effective 2026-10-16
   </footer>
 
 </div>

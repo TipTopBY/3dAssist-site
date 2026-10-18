@@ -16,7 +16,7 @@
 <div class="wrap doc">
 
   <h1>Privacy Policy for 3dAssist</h1>
-  <p class="meta">Effective date: 2026-10-16 · published at
+  <p class="meta">Effective date: 2026-10-18 · published at
      https://tiptopby.github.io/3dAssist-site/privacy.html</p>
   <p class="nav"><a href="index.html">Overview</a> · <a href="terms.html">Terms and Conditions</a> · <a href="delete-account.html">Delete account</a></p>
 
@@ -51,9 +51,19 @@
     <li>A self-registered Cults3D username/API key and MyMiniFactory API key can be stored encrypted on the
         device and sent directly to that provider to enable catalog search. They are not sent to the
         3dAssist backend by the reviewed client.</li>
-    <li>Printer address and printer credentials are stored encrypted on the device and are used to
-        communicate directly with the printer on the local network. They are excluded from Android backup by
-        the app rules. Depending on the printer protocol, this LAN traffic may be cleartext.</li>
+    <li>Printer address and access credentials are stored encrypted on the device and used for direct
+        communication with the printer on the local network. These local settings are excluded from Android
+        app-data backup. Depending on the printer protocol, this LAN traffic may be cleartext.</li>
+    <li>After Google sign-in, printer settings (model, display name, nozzle, capabilities and calibration)
+        synchronize with the account on the 3dAssist backend. The address and access credentials are sent
+        only as opaque AES-256-GCM ciphertext; the backend never receives the decryption key. Live printer
+        snapshots and observation timestamps are not synchronized.</li>
+    <li>The account encryption key is protected locally by Android Keystore and stored for restoration
+        through Google Block Store, together with its Google account identifier. The app enables cloud
+        backup of this key record only after confirming that end-to-end encryption is available. Restoration
+        depends on Google Play services and Android backup/restore settings; Google sign-in alone does not
+        guarantee it. Without a usable key, printer settings return without the address and access
+        credentials, which must be entered again.</li>
   </ul>
 
   <h2>Diagnostics</h2>
@@ -84,6 +94,11 @@
      operator of the 3dAssist backend configured in the app</strong>, Sentry for error reports and feedback,
      Google translation services when translation is used, and a selected model-source provider when the
      user uses that provider. Provider and printer traffic is not routed to another source by the app.</p>
+  <p>Google Block Store, provided through Google Play services, stores and restores the account encryption
+     key record to restore printer connections on another device. Google receives an end-to-end encrypted
+     backup of this record when cloud backup is enabled by the app. The 3dAssist backend receives printer
+     metadata and encrypted address/access credentials, but cannot decrypt them. Source-provider credentials
+     and WebView sessions are outside account printer synchronization.</p>
 
   <h2>Security</h2>
   <p>Release builds require an HTTPS backend origin, and app-managed source-cookie forwarding requires an
@@ -94,12 +109,15 @@
      audit.</p>
 
   <h2>Retention and deletion</h2>
-  <p>The connected account can be deleted in Settings → Privacy and data. The app asks for confirmation,
-     the backend deletes the account profile, favorites, print plans, uploaded files and history, and only
-     after confirmation the app clears its account token, cached history/outbox and pending
-     execution/upload data, and mints a new random install identifier. Printer credentials and provider
-     WebView sessions remain local and are removed separately from printer/source settings or by clearing
-     app storage. The same deletion can be requested without the app at
+  <p>The connected account can be deleted in Settings → Privacy and data. The app asks for confirmation;
+     the backend deletes the account profile, favorites, print plans, uploaded files, history and account
+     printer records, including their ciphertext. After server confirmation, the app deletes the account
+     encryption key from Google Block Store and its local key copy before completing local cleanup. It then
+     clears its account token, cached history/outbox and pending execution/upload data, and mints a new
+     random install identifier. Local printer settings and provider WebView sessions are removed separately
+     from printer/source settings or by clearing app storage. Signing out stops printer synchronization but
+     keeps printers on the device and preserves the local key and its Block Store record. The same deletion
+     can be requested without the app at
      <a href="delete-account.html">https://tiptopby.github.io/3dAssist-site/delete-account.html</a>.
      Encrypted service backups are rotated out on a 14-day cycle, so a copy of deleted data can survive in a
      backup for up to 14 days after the account is deleted.</p>
@@ -110,7 +128,7 @@
      <a href="mailto:p_avtushenko@outlook.com">p_avtushenko@outlook.com</a>.</p>
 
   <footer>
-    3dAssist · Privacy Policy · effective 2026-10-16
+    3dAssist · Privacy Policy · effective 2026-10-18
   </footer>
 
 </div>

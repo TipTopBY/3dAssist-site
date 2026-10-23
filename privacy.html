@@ -16,7 +16,7 @@
 <div class="wrap doc">
 
   <h1>Privacy Policy for 3dAssist</h1>
-  <p class="meta">Effective date: 2026-10-18 · published at
+  <p class="meta">Effective date: 2026-10-23 · published at
      https://tiptopby.github.io/3dAssist-site/privacy.html</p>
   <p class="nav"><a href="index.html">Overview</a> · <a href="terms.html">Terms and Conditions</a> · <a href="delete-account.html">Delete account</a></p>
 
@@ -87,12 +87,40 @@
         is off, the app sends no further reports or feedback.</li>
   </ul>
 
+  <h2>AI request processing</h2>
+  <p>To prepare a print plan, the 3dAssist backend sends the request text to a language model through
+     OpenRouter (processor: OpenRouter, Inc., USA), which forwards it to the AI model provider it selects.
+     Their own policies govern how they retain requests.</p>
+  <ul>
+    <li><strong>What goes to the AI provider.</strong> The model description and purpose, selected quality
+        goals, plan revision comment, material, printer profile and technical model geometry parameters; for
+        part-type detection, the model title and description. Model files and images are not sent to the AI
+        provider in the current version.</li>
+    <li><strong>Request log (traces).</strong> For diagnostics and to improve plan quality, the backend stores
+        AI requests and responses in an Arize Phoenix log on the publisher's server in Belarus; the log is
+        not shared with third parties. A trace is linked to a pseudonymous session identifier derived from
+        <code>owner_id</code>; the <code>owner_id</code> itself, email and tokens are not written to it.</li>
+    <li><strong>Redacted mode.</strong> Production runs in redacted mode only: API keys, bearer tokens and
+        other secrets are scrubbed from the text before it is written, and an image is stored only as its
+        type, size and SHA-256 hash, without base64 content. An unscrubbed full mode can be enabled
+        explicitly only in dev/stage test environments; production code forbids it.</li>
+    <li><strong>Access.</strong> Only the publisher, through a closed administrative channel (SSH tunnel);
+        there is no public access.</li>
+    <li><strong>Retention.</strong> 30 days, after which traces are deleted automatically (checked hourly).
+        The log is not included in backups.</li>
+    <li><strong>Deletion.</strong> Deleting the account in the app does not remove traces immediately: they
+        expire with the retention period, 30 days after they were written. On request to the address below,
+        the publisher can delete traces earlier if the request can be matched to an account; the service
+        does not store email, so this is not always possible.</li>
+  </ul>
+
   <h2>Purposes and sharing</h2>
   <p>Data is used to provide authentication, model processing, print planning, printer control, history,
-     translation, support of the user-requested source download and error fixing. The code contains no
+     translation, support of the user-requested source download, error fixing and improving print plan
+     quality. The code contains no
      advertising or analytics SDK; the only error-reporting SDK is Sentry. Data is transmitted to <strong>the
      operator of the 3dAssist backend configured in the app</strong>, Sentry for error reports and feedback,
-     Google translation services when translation is used, and a selected model-source provider when the
+     OpenRouter and the AI provider it selects for print planning, Google translation services when translation is used, and a selected model-source provider when the
      user uses that provider. Provider and printer traffic is not routed to another source by the app.</p>
   <p>Google Block Store, provided through Google Play services, stores and restores the account encryption
      key record to restore printer connections on another device. Google receives an end-to-end encrypted
@@ -119,8 +147,9 @@
      keeps printers on the device and preserves the local key and its Block Store record. The same deletion
      can be requested without the app at
      <a href="delete-account.html">https://tiptopby.github.io/3dAssist-site/delete-account.html</a>.
-     Encrypted service backups are rotated out on a 14-day cycle, so a copy of deleted data can survive in a
-     backup for up to 14 days after the account is deleted.</p>
+     Service backups are kept for no more than 3 days, so a copy of deleted data can survive in a backup
+     for up to 3 days after the account is deleted. AI request traces expire on their own schedule — see
+     “AI request processing”.</p>
 
   <h2>Children, changes and contact</h2>
   <p>The reviewed code does not implement a children-specific experience. Material policy changes are
@@ -128,7 +157,7 @@
      <a href="mailto:p_avtushenko@outlook.com">p_avtushenko@outlook.com</a>.</p>
 
   <footer>
-    3dAssist · Privacy Policy · effective 2026-10-18
+    3dAssist · Privacy Policy · effective 2026-10-23
   </footer>
 
 </div>

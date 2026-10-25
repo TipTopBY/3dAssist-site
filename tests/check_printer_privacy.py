@@ -20,6 +20,7 @@ visible = " ".join(unescape(re.sub(r"<[^>]+>", "", page)).split())
 # Compare complete changed paragraphs, so deletion/restore qualifications cannot
 # silently disappear from the public page while remaining in the release policy.
 for start in (
+    "- A self-registered MyMiniFactory API key",
     "- Printer address and access credentials",
     "- After Google sign-in",
     "- The account encryption key",

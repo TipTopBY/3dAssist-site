@@ -7,8 +7,14 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = (
     "Thingiverse", "Printables", "MakerWorld", "MyMiniFactory",
-    "Thangs", "GrabCAD", "Cults3D", "Creality Cloud",
+    "Thangs", "GrabCAD", "Creality Cloud",
 )
+
+for page in ("index.html", "terms.html", "privacy.html"):
+    assert "cults3d" not in (ROOT / page).read_text(encoding="utf-8").lower(), (
+        f"{page}: disabled source Cults3D must not be advertised"
+    )
+print("PASS overview, terms and privacy omit disabled Cults3D")
 
 for page, pattern in (
     ("index.html", r'<div class="note">(.*?)</div>'),
